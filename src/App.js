@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory, useParams } from "react-router-dom";
 import MovieList from './components/MovieList';
 import Movie from './components/Movie';
 
@@ -17,6 +17,7 @@ const App = (props) => {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
 
   const { push } = useHistory()
+ 
 
   useEffect(()=>{
     axios.get('http://localhost:9000/api/movies')
@@ -55,8 +56,10 @@ const App = (props) => {
           <FavoriteMovieList favoriteMovies={favoriteMovies}/>
         
           <Switch>
-            <Route path="/movies/edit/:id">
-              <EditMovieForm />
+            <Route path="/movies/edit/:id"
+              render={props => <EditMovieForm setMovies={setMovies}/>}
+            >
+
             </Route>
             <Route 
               path="/movies/:id"

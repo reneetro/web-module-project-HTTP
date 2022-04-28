@@ -11,7 +11,6 @@ const Movie = (props) => {
     const { id } = useParams();
     const { push } = useHistory();
 
-console.log(props)
 
     useEffect(()=>{
         axios.get(`http://localhost:9000/api/movies/${id}`)
